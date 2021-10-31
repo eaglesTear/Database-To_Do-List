@@ -79,7 +79,7 @@ app.get("/", function (req, res) {
 });
 
 app.get("/:customListName", function (req, res) {
-    
+
     const customListName = _.capitalize(req.params.customListName);
 
     List.findOne({
@@ -150,7 +150,7 @@ app.post("/delete", function (req, res) {
                     _id: checkedItemId
                 }
             }
-        }, function(err, foundList) {
+        }, function (err, foundList) {
             if (!err) {
                 res.redirect("/" + listName);
             }
@@ -169,6 +169,11 @@ app.get("/about", function (req, res) {
     res.render("about");
 });
 
-app.listen(3000, function () {
-    console.log("Server started on port 3000");
+let port = process.env.PORT;
+if (port == null || port == "") {
+    port = 3000;
+}
+
+app.listen(port, function () {
+    console.log("Server started successfully.");
 });
